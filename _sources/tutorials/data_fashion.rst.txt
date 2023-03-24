@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_tutorials_data_fashion.py>`
+        :ref:`Go to the end <sphx_glr_download_tutorials_data_fashion.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -29,7 +29,7 @@ pipeline. The tutorial is based heavily on the `PyTorch Quickstart
 Tutorial <https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html>`__,
 but modified to demonstrate use of ``TensorDict``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-27
+.. GENERATED FROM PYTHON SOURCE LINES 14-28
 
 .. code-block:: default
 
@@ -37,6 +37,7 @@ but modified to demonstrate use of ``TensorDict``.
 
     import torch
     import torch.nn as nn
+
     from tensordict import MemmapTensor, TensorDict
     from torch.utils.data import DataLoader
     from torchvision import datasets
@@ -59,14 +60,14 @@ but modified to demonstrate use of ``TensorDict``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-32
+.. GENERATED FROM PYTHON SOURCE LINES 29-33
 
 The ``torchvision.datasets`` module contains a number of convenient pre-prepared
 datasets. In this tutorial we'll use the relatively simple FashionMNIST dataset. Each
 image is an item of clothing, the objective is to classify the type of clothing in
 the image (e.g. "Bag", "Sneaker" etc.).
 
-.. GENERATED FROM PYTHON SOURCE LINES 32-46
+.. GENERATED FROM PYTHON SOURCE LINES 33-47
 
 .. code-block:: default
 
@@ -88,35 +89,10 @@ the image (e.g. "Bag", "Sneaker" etc.).
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-images-idx3-ubyte.gz
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-images-idx3-ubyte.gz to data/FashionMNIST/raw/train-images-idx3-ubyte.gz
-      0%|          | 0/26421880 [00:00<?, ?it/s]      0%|          | 32768/26421880 [00:00<02:03, 213520.95it/s]      0%|          | 65536/26421880 [00:00<02:05, 209617.49it/s]      0%|          | 131072/26421880 [00:00<01:26, 303538.63it/s]      1%|          | 229376/26421880 [00:00<01:01, 429156.43it/s]      2%|1         | 491520/26421880 [00:00<00:29, 872791.13it/s]      4%|3         | 950272/26421880 [00:00<00:16, 1562496.13it/s]      7%|7         | 1933312/26421880 [00:01<00:07, 3084277.59it/s]     15%|#4        | 3833856/26421880 [00:01<00:03, 5923551.04it/s]     26%|##6       | 6881280/26421880 [00:01<00:01, 10086649.63it/s]     37%|###7      | 9895936/26421880 [00:01<00:01, 12852278.62it/s]     49%|####8     | 12943360/26421880 [00:01<00:00, 14810472.55it/s]     61%|######    | 15990784/26421880 [00:01<00:00, 16165406.96it/s]     72%|#######2  | 19038208/26421880 [00:02<00:00, 17098785.15it/s]     83%|########3 | 22020096/26421880 [00:02<00:00, 17624749.54it/s]     95%|#########4| 25034752/26421880 [00:02<00:00, 18047760.26it/s]    100%|##########| 26421880/26421880 [00:02<00:00, 11057061.18it/s]
-    Extracting data/FashionMNIST/raw/train-images-idx3-ubyte.gz to data/FashionMNIST/raw
-
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-labels-idx1-ubyte.gz
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-labels-idx1-ubyte.gz to data/FashionMNIST/raw/train-labels-idx1-ubyte.gz
-      0%|          | 0/29515 [00:00<?, ?it/s]    100%|##########| 29515/29515 [00:00<00:00, 187185.69it/s]    100%|##########| 29515/29515 [00:00<00:00, 186729.70it/s]
-    Extracting data/FashionMNIST/raw/train-labels-idx1-ubyte.gz to data/FashionMNIST/raw
-
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-images-idx3-ubyte.gz
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-images-idx3-ubyte.gz to data/FashionMNIST/raw/t10k-images-idx3-ubyte.gz
-      0%|          | 0/4422102 [00:00<?, ?it/s]      1%|          | 32768/4422102 [00:00<00:21, 207620.49it/s]      1%|1         | 65536/4422102 [00:00<00:21, 206915.91it/s]      3%|2         | 131072/4422102 [00:00<00:14, 301235.74it/s]      5%|5         | 229376/4422102 [00:00<00:09, 427289.21it/s]     11%|#1        | 491520/4422102 [00:00<00:04, 867396.48it/s]     21%|##1       | 950272/4422102 [00:00<00:02, 1558830.32it/s]     44%|####3     | 1933312/4422102 [00:01<00:00, 3075376.39it/s]     87%|########6 | 3833856/4422102 [00:01<00:00, 5837346.15it/s]    100%|##########| 4422102/4422102 [00:01<00:00, 3464244.28it/s]
-    Extracting data/FashionMNIST/raw/t10k-images-idx3-ubyte.gz to data/FashionMNIST/raw
-
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-labels-idx1-ubyte.gz
-    Downloading http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/t10k-labels-idx1-ubyte.gz to data/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz
-      0%|          | 0/5148 [00:00<?, ?it/s]    100%|##########| 5148/5148 [00:00<00:00, 32666077.14it/s]
-    Extracting data/FashionMNIST/raw/t10k-labels-idx1-ubyte.gz to data/FashionMNIST/raw
 
 
 
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 47-53
+.. GENERATED FROM PYTHON SOURCE LINES 48-54
 
 We will create two tensordicts, one each for the training and test data. We create
 memory-mapped tensors to hold the data. This will allow us to efficiently load
@@ -125,7 +101,7 @@ individual images.
 
 First we create the ``MemmapTensor`` containers.
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-78
+.. GENERATED FROM PYTHON SOURCE LINES 54-79
 
 .. code-block:: default
 
@@ -161,13 +137,13 @@ First we create the ``MemmapTensor`` containers.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-82
+.. GENERATED FROM PYTHON SOURCE LINES 80-83
 
 Then we can iterate over the data to populate the memory-mapped tensors. This takes a
 bit of time, but performing the transforms up-front will save repeated effort during
 training later.
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-89
+.. GENERATED FROM PYTHON SOURCE LINES 83-90
 
 .. code-block:: default
 
@@ -185,7 +161,7 @@ training later.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-100
+.. GENERATED FROM PYTHON SOURCE LINES 91-101
 
 DataLoaders
 ----------------
@@ -198,7 +174,7 @@ Since ``TensorDict`` implements ``__len__`` and ``__getitem__`` (and also
 directly from it. Note that because ``TensorDict`` can already handle batched indices,
 there is no need for collation, so we pass the identity function as ``collate_fn``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 100-113
+.. GENERATED FROM PYTHON SOURCE LINES 101-114
 
 .. code-block:: default
 
@@ -222,7 +198,7 @@ there is no need for collation, so we pass the identity function as ``collate_fn
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 114-120
+.. GENERATED FROM PYTHON SOURCE LINES 115-121
 
 Model
 -------
@@ -231,7 +207,7 @@ We use the same model from the
 `Quickstart Tutorial <https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html>`__.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 120-144
+.. GENERATED FROM PYTHON SOURCE LINES 121-145
 
 .. code-block:: default
 
@@ -290,7 +266,7 @@ We use the same model from the
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 145-151
+.. GENERATED FROM PYTHON SOURCE LINES 146-152
 
 Optimizing the parameters
 ---------------------------------
@@ -299,7 +275,7 @@ We'll optimise the parameters of the model using stochastic gradient descent and
 cross-entropy loss.
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 151-176
+.. GENERATED FROM PYTHON SOURCE LINES 152-177
 
 .. code-block:: default
 
@@ -335,13 +311,13 @@ cross-entropy loss.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 177-180
+.. GENERATED FROM PYTHON SOURCE LINES 178-181
 
 The training loop for our ``TensorDict``-based DataLoader is very similar, we just
 adjust how we unpack the data to the more explicit key-based retrieval offered by
 ``TensorDict``. The ``.contiguous()`` method loads the data stored in the memmap tensor.
 
-.. GENERATED FROM PYTHON SOURCE LINES 180-266
+.. GENERATED FROM PYTHON SOURCE LINES 181-267
 
 .. code-block:: default
 
@@ -448,156 +424,156 @@ adjust how we unpack the data to the more explicit key-based retrieval offered b
         is_shared=False)
     Epoch 1
     -------------------------
-    loss: 2.294031 [    0/60000]
-    loss: 2.292115 [ 6400/60000]
-    loss: 2.275047 [12800/60000]
-    loss: 2.268086 [19200/60000]
-    loss: 2.255127 [25600/60000]
-    loss: 2.222800 [32000/60000]
-    loss: 2.228415 [38400/60000]
-    loss: 2.198533 [44800/60000]
-    loss: 2.200014 [51200/60000]
-    loss: 2.168078 [57600/60000]
+    loss: 2.299875 [    0/60000]
+    loss: 2.285598 [ 6400/60000]
+    loss: 2.264819 [12800/60000]
+    loss: 2.260806 [19200/60000]
+    loss: 2.242804 [25600/60000]
+    loss: 2.219555 [32000/60000]
+    loss: 2.231336 [38400/60000]
+    loss: 2.195798 [44800/60000]
+    loss: 2.182305 [51200/60000]
+    loss: 2.161143 [57600/60000]
     Test Error: 
-     Accuracy: 49.8%, Avg loss: 2.164378 
+     Accuracy: 48.9%, Avg loss: 2.152956 
 
     Epoch 2
     -------------------------
-    loss: 2.172433 [    0/60000]
-    loss: 2.169350 [ 6400/60000]
-    loss: 2.118262 [12800/60000]
-    loss: 2.128384 [19200/60000]
-    loss: 2.081349 [25600/60000]
-    loss: 2.028674 [32000/60000]
-    loss: 2.048062 [38400/60000]
-    loss: 1.983295 [44800/60000]
-    loss: 1.985680 [51200/60000]
-    loss: 1.908781 [57600/60000]
+    loss: 2.164006 [    0/60000]
+    loss: 2.150567 [ 6400/60000]
+    loss: 2.092627 [12800/60000]
+    loss: 2.111666 [19200/60000]
+    loss: 2.063286 [25600/60000]
+    loss: 2.002791 [32000/60000]
+    loss: 2.036257 [38400/60000]
+    loss: 1.954350 [44800/60000]
+    loss: 1.948979 [51200/60000]
+    loss: 1.882274 [57600/60000]
     Test Error: 
-     Accuracy: 58.1%, Avg loss: 1.911499 
+     Accuracy: 61.0%, Avg loss: 1.883850 
 
     Epoch 3
     -------------------------
-    loss: 1.944004 [    0/60000]
-    loss: 1.917514 [ 6400/60000]
-    loss: 1.807776 [12800/60000]
-    loss: 1.836759 [19200/60000]
-    loss: 1.728057 [25600/60000]
-    loss: 1.686590 [32000/60000]
-    loss: 1.696903 [38400/60000]
-    loss: 1.611980 [44800/60000]
-    loss: 1.631717 [51200/60000]
-    loss: 1.518497 [57600/60000]
+    loss: 1.913893 [    0/60000]
+    loss: 1.881938 [ 6400/60000]
+    loss: 1.766810 [12800/60000]
+    loss: 1.812891 [19200/60000]
+    loss: 1.702044 [25600/60000]
+    loss: 1.650486 [32000/60000]
+    loss: 1.670398 [38400/60000]
+    loss: 1.568121 [44800/60000]
+    loss: 1.581856 [51200/60000]
+    loss: 1.481491 [57600/60000]
     Test Error: 
-     Accuracy: 60.0%, Avg loss: 1.540039 
+     Accuracy: 62.2%, Avg loss: 1.507409 
 
     Epoch 4
     -------------------------
-    loss: 1.606197 [    0/60000]
-    loss: 1.572495 [ 6400/60000]
-    loss: 1.427145 [12800/60000]
-    loss: 1.489805 [19200/60000]
-    loss: 1.366895 [25600/60000]
-    loss: 1.369923 [32000/60000]
-    loss: 1.374942 [38400/60000]
-    loss: 1.310087 [44800/60000]
-    loss: 1.341916 [51200/60000]
-    loss: 1.236677 [57600/60000]
+    loss: 1.570430 [    0/60000]
+    loss: 1.535400 [ 6400/60000]
+    loss: 1.388930 [12800/60000]
+    loss: 1.467643 [19200/60000]
+    loss: 1.341434 [25600/60000]
+    loss: 1.337792 [32000/60000]
+    loss: 1.349624 [38400/60000]
+    loss: 1.268108 [44800/60000]
+    loss: 1.295143 [51200/60000]
+    loss: 1.206962 [57600/60000]
     Test Error: 
-     Accuracy: 62.4%, Avg loss: 1.264662 
+     Accuracy: 63.7%, Avg loss: 1.236986 
 
     Epoch 5
     -------------------------
-    loss: 1.340294 [    0/60000]
-    loss: 1.324226 [ 6400/60000]
-    loss: 1.162043 [12800/60000]
-    loss: 1.263223 [19200/60000]
-    loss: 1.131618 [25600/60000]
-    loss: 1.165318 [32000/60000]
-    loss: 1.177966 [38400/60000]
-    loss: 1.124733 [44800/60000]
-    loss: 1.159831 [51200/60000]
-    loss: 1.071442 [57600/60000]
+    loss: 1.311519 [    0/60000]
+    loss: 1.291346 [ 6400/60000]
+    loss: 1.128389 [12800/60000]
+    loss: 1.244564 [19200/60000]
+    loss: 1.111135 [25600/60000]
+    loss: 1.138242 [32000/60000]
+    loss: 1.160730 [38400/60000]
+    loss: 1.086295 [44800/60000]
+    loss: 1.120838 [51200/60000]
+    loss: 1.052584 [57600/60000]
     Test Error: 
-     Accuracy: 64.2%, Avg loss: 1.095659 
+     Accuracy: 65.1%, Avg loss: 1.072828 
 
-    TensorDict training done! time:  19.6508 s
+    TensorDict training done! time:  14.3816 s
     Epoch 1
     -------------------------
-    loss: 2.300483 [    0/60000]
-    loss: 2.287697 [ 6400/60000]
-    loss: 2.264570 [12800/60000]
-    loss: 2.266343 [19200/60000]
-    loss: 2.239291 [25600/60000]
-    loss: 2.218402 [32000/60000]
-    loss: 2.238330 [38400/60000]
-    loss: 2.201248 [44800/60000]
-    loss: 2.207576 [51200/60000]
-    loss: 2.180500 [57600/60000]
+    loss: 2.312906 [    0/60000]
+    loss: 2.295580 [ 6400/60000]
+    loss: 2.280724 [12800/60000]
+    loss: 2.267543 [19200/60000]
+    loss: 2.239395 [25600/60000]
+    loss: 2.219544 [32000/60000]
+    loss: 2.230503 [38400/60000]
+    loss: 2.197068 [44800/60000]
+    loss: 2.190797 [51200/60000]
+    loss: 2.153451 [57600/60000]
     Test Error: 
-     Accuracy: 46.5%, Avg loss: 2.162694 
+     Accuracy: 39.2%, Avg loss: 2.150571 
 
     Epoch 2
     -------------------------
-    loss: 2.175852 [    0/60000]
-    loss: 2.161321 [ 6400/60000]
-    loss: 2.101563 [12800/60000]
-    loss: 2.125315 [19200/60000]
-    loss: 2.064560 [25600/60000]
-    loss: 2.015717 [32000/60000]
-    loss: 2.052503 [38400/60000]
-    loss: 1.972073 [44800/60000]
-    loss: 1.987833 [51200/60000]
-    loss: 1.923360 [57600/60000]
+    loss: 2.163031 [    0/60000]
+    loss: 2.146266 [ 6400/60000]
+    loss: 2.096492 [12800/60000]
+    loss: 2.108875 [19200/60000]
+    loss: 2.040062 [25600/60000]
+    loss: 1.984811 [32000/60000]
+    loss: 2.016964 [38400/60000]
+    loss: 1.936716 [44800/60000]
+    loss: 1.949804 [51200/60000]
+    loss: 1.861329 [57600/60000]
     Test Error: 
-     Accuracy: 50.9%, Avg loss: 1.905793 
+     Accuracy: 50.1%, Avg loss: 1.866167 
 
     Epoch 3
     -------------------------
-    loss: 1.940182 [    0/60000]
-    loss: 1.905750 [ 6400/60000]
-    loss: 1.782916 [12800/60000]
-    loss: 1.832322 [19200/60000]
-    loss: 1.718218 [25600/60000]
-    loss: 1.670290 [32000/60000]
-    loss: 1.705737 [38400/60000]
-    loss: 1.599339 [44800/60000]
-    loss: 1.631450 [51200/60000]
-    loss: 1.533018 [57600/60000]
+    loss: 1.899203 [    0/60000]
+    loss: 1.861323 [ 6400/60000]
+    loss: 1.759274 [12800/60000]
+    loss: 1.800520 [19200/60000]
+    loss: 1.669805 [25600/60000]
+    loss: 1.628828 [32000/60000]
+    loss: 1.657183 [38400/60000]
+    loss: 1.562118 [44800/60000]
+    loss: 1.590185 [51200/60000]
+    loss: 1.480701 [57600/60000]
     Test Error: 
-     Accuracy: 59.1%, Avg loss: 1.537760 
+     Accuracy: 61.7%, Avg loss: 1.500167 
 
     Epoch 4
     -------------------------
-    loss: 1.608105 [    0/60000]
-    loss: 1.568125 [ 6400/60000]
-    loss: 1.410065 [12800/60000]
-    loss: 1.482383 [19200/60000]
-    loss: 1.367379 [25600/60000]
-    loss: 1.359648 [32000/60000]
-    loss: 1.381638 [38400/60000]
-    loss: 1.298933 [44800/60000]
-    loss: 1.336671 [51200/60000]
-    loss: 1.242306 [57600/60000]
+    loss: 1.565673 [    0/60000]
+    loss: 1.524067 [ 6400/60000]
+    loss: 1.393520 [12800/60000]
+    loss: 1.460906 [19200/60000]
+    loss: 1.331643 [25600/60000]
+    loss: 1.337728 [32000/60000]
+    loss: 1.353150 [38400/60000]
+    loss: 1.282057 [44800/60000]
+    loss: 1.310786 [51200/60000]
+    loss: 1.220321 [57600/60000]
     Test Error: 
-     Accuracy: 63.0%, Avg loss: 1.262439 
+     Accuracy: 63.5%, Avg loss: 1.239225 
 
     Epoch 5
     -------------------------
-    loss: 1.346502 [    0/60000]
-    loss: 1.321368 [ 6400/60000]
-    loss: 1.149746 [12800/60000]
-    loss: 1.251524 [19200/60000]
-    loss: 1.132894 [25600/60000]
-    loss: 1.155137 [32000/60000]
-    loss: 1.181973 [38400/60000]
-    loss: 1.113112 [44800/60000]
-    loss: 1.152807 [51200/60000]
-    loss: 1.073987 [57600/60000]
+    loss: 1.314462 [    0/60000]
+    loss: 1.291037 [ 6400/60000]
+    loss: 1.143281 [12800/60000]
+    loss: 1.242279 [19200/60000]
+    loss: 1.111967 [25600/60000]
+    loss: 1.144879 [32000/60000]
+    loss: 1.164336 [38400/60000]
+    loss: 1.106506 [44800/60000]
+    loss: 1.137273 [51200/60000]
+    loss: 1.064743 [57600/60000]
     Test Error: 
-     Accuracy: 64.5%, Avg loss: 1.092168 
+     Accuracy: 64.8%, Avg loss: 1.077403 
 
-    Training done! time:  68.1349 s
+    Training done! time:  42.1304 s
 
 
 
@@ -605,7 +581,7 @@ adjust how we unpack the data to the more explicit key-based retrieval offered b
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 1 minutes  56.086 seconds)
+   **Total running time of the script:** ( 1 minutes  9.660 seconds)
 
 
 .. _sphx_glr_download_tutorials_data_fashion.py:
@@ -613,6 +589,8 @@ adjust how we unpack the data to the more explicit key-based retrieval offered b
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python
