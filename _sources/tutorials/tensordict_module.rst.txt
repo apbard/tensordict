@@ -305,7 +305,7 @@ tensordict is just the input modified in-place:
 ``ProbabilisticTensorDictModule`` is a non-parametric module representing a
 probability distribution. Distribution parameters are read from tensordict
 input, and the output is written to an output tensordict. The output is
-sampled given some rule, specified by the input ``default_interaction_mode``
+sampled given some rule, specified by the input ``default_interaction_type``
 argument and the ``exploration_mode()`` global function. If they conflict,
 the context manager precedes.
 
@@ -1043,7 +1043,7 @@ Benchmarking
 
  .. code-block:: none
 
-    Execution time: 0.012805700302124023 seconds
+    Execution time: 0.015467166900634766 seconds
 
 
 
@@ -1066,7 +1066,7 @@ Benchmarking
 
  .. code-block:: none
 
-    Execution time: 0.006037473678588867 seconds
+    Execution time: 0.0077779293060302734 seconds
 
 
 
@@ -1081,7 +1081,7 @@ Have fun with TensorDictModule!
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.222 seconds)
+   **Total running time of the script:** ( 0 minutes  10.180 seconds)
 
 
 .. _sphx_glr_download_tutorials_tensordict_module.py:

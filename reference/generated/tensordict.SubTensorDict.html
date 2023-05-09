@@ -218,7 +218,7 @@
               
               
                 <div class="version">
-                  main (0.1.0+ce6679a )
+                  main (0.1.1+961bf9d )
                 </div>
               
             
@@ -441,7 +441,7 @@ the tensordict shape.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tensordict.SubTensorDict.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">others</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TensorDictBase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">constructor_kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TensorDictBase</span></span></span><a class="headerlink" href="#tensordict.SubTensorDict.apply" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">others</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TensorDictBase</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">constructor_kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TensorDictBase</span></span></span><a class="headerlink" href="#tensordict.SubTensorDict.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a callable to all values stored in the tensordict and sets them in a new tensordict.</p>
 <p>The apply method will return an TensorDict instance, regardless of the
 input type. To keep the same type, one can execute</p>
@@ -462,6 +462,8 @@ being called.</p></li>
 the resulting TensorDict will have the desired batch_size.
 The <a class="reference internal" href="#tensordict.SubTensorDict.batch_size" title="tensordict.SubTensorDict.batch_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_size</span></code></a> argument should match the batch_size after
 the transformation. This is a keyword only argument.</p></li>
+<li><p><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the new dimension names, in case the
+batch_size is modified.</p></li>
 <li><p><strong>inplace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – if True, changes are made in-place.
 Default is False. This is a keyword only argument.</p></li>
 <li><p><strong>**constructor_kwargs</strong> – additional keyword arguments to be passed to the
@@ -497,6 +499,14 @@ tensordict.</p>
 <dd class="field-even"><p>self or a copy of self with the function applied</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tensordict.SubTensorDict.as_tensor">
+<span class="sig-name descname"><span class="pre">as_tensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.SubTensorDict.as_tensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls as_tensor on all the tensors contained in the object.</p>
+<p>This is reserved to classes that contain exclusively MemmapTensors,
+and will raise an exception in all other cases.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -693,6 +703,42 @@ are placed, or None if TensorDict does not have a device.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="tensordict.SubTensorDict.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.SubTensorDict.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattens all the tensors of a tensordict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – </p></li>
+<li><p><strong>end_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">td</span> <span class="o">=</span> <span class="n">TensorDict</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)},</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_flat</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_flat</span><span class="o">.</span><span class="n">batch_size</span>
+<span class="go">torch.Size([12])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_flat</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+<span class="go">tensor([[ 0,  1,  2,  3,  4],</span>
+<span class="go">        [ 5,  6,  7,  8,  9],</span>
+<span class="go">        [10, 11, 12, 13, 14],</span>
+<span class="go">        [15, 16, 17, 18, 19],</span>
+<span class="go">        [20, 21, 22, 23, 24],</span>
+<span class="go">        [25, 26, 27, 28, 29],</span>
+<span class="go">        [30, 31, 32, 33, 34],</span>
+<span class="go">        [35, 36, 37, 38, 39],</span>
+<span class="go">        [40, 41, 42, 43, 44],</span>
+<span class="go">        [45, 46, 47, 48, 49],</span>
+<span class="go">        [50, 51, 52, 53, 54],</span>
+<span class="go">        [55, 56, 57, 58, 59]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_flat</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+<span class="go">tensor([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="tensordict.SubTensorDict.gather">
 <span class="sig-name descname"><span class="pre">gather</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TensorDictBase</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TensorDictBase</span></span></span><a class="headerlink" href="#tensordict.SubTensorDict.gather" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gathers values along an axis specified by <cite>dim</cite>.</p>
@@ -731,6 +777,14 @@ have the same shape as the index.</p></li>
 <span class="go">    is_shared=False)</span>
 </pre></div>
 </div>
+<p>Gather keeps the dimension names.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">td</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_gather</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_gather</span><span class="o">.</span><span class="n">names</span>
+<span class="go">[&quot;a&quot;, &quot;b&quot;]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -746,7 +800,7 @@ have the same shape as the index.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">multiprocessing</span> <span class="k">as</span> <span class="n">mp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tensordict</span> <span class="kn">import</span> <span class="n">TensorDict</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">client</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="s2">&quot;gloo&quot;</span><span class="p">,</span>
@@ -935,7 +989,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">False</
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">... </span>    <span class="n">td</span><span class="o">.</span><span class="n">isend</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">server</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">return_premature</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="s2">&quot;gloo&quot;</span><span class="p">,</span>
@@ -958,7 +1012,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">False</
 <span class="gp">... </span>    <span class="k">assert</span> <span class="p">(</span><span class="n">td</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;yuppie&quot;</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">main_worker</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span>
@@ -1217,6 +1271,29 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">False</
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="tensordict.SubTensorDict.reduce">
+<span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op=&lt;RedOpType.SUM:</span> <span class="pre">0&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">async_op=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_premature=False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.SubTensorDict.reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces the tensordict across all machines.</p>
+<p>Only the process with <code class="docutils literal notranslate"><span class="pre">rank</span></code> dst is going to receive the final result.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tensordict.SubTensorDict.refine_names">
+<span class="sig-name descname"><span class="pre">refine_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.SubTensorDict.refine_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refines the dimension names of self according to names.</p>
+<p>Refining is a special case of renaming that “lifts” unnamed dimensions.
+A None dim can be refined to have any name; a named dim can only be
+refined to have the same name.</p>
+<p>Because named tensors can coexist with unnamed tensors, refining names
+gives a nice way to write named-tensor-aware code that works with both
+named and unnamed tensors.</p>
+<p>names may contain up to one Ellipsis (…). The Ellipsis is expanded
+greedily; it is expanded in-place to fill names to the same length as
+self.dim() using names from the corresponding indices of self.names.</p>
+<p>Returns: the tensordict with dimensions named accordingly.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="tensordict.SubTensorDict.rename_key_">
 <span class="sig-name descname"><span class="pre">rename_key_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#tensordict.SubTensorDict" title="tensordict.tensordict.SubTensorDict"><span class="pre">SubTensorDict</span></a></span></span><a class="headerlink" href="#tensordict.SubTensorDict.rename_key_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames a key with a new string.</p>
@@ -1300,8 +1377,8 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">False</
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">multiprocessing</span> <span class="k">as</span> <span class="n">mp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tensordict</span> <span class="kn">import</span> <span class="n">TensorDict</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">client</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="s2">&quot;gloo&quot;</span><span class="p">,</span>
@@ -1320,7 +1397,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">False</
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">... </span>    <span class="n">td</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">server</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="s2">&quot;gloo&quot;</span><span class="p">,</span>
@@ -1340,7 +1417,7 @@ Defaults to <code class="docutils literal notranslate"><span class="pre">False</
 <span class="gp">... </span>    <span class="k">assert</span> <span class="p">(</span><span class="n">td</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;yuppie&quot;</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">main_worker</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">queue</span><span class="p">,))</span>
@@ -1546,13 +1623,13 @@ expect the tensor once they are returned. Defaults to <code class="docutils lite
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">timeit</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tensordict</span> <span class="kn">import</span> <span class="n">TensorDict</span><span class="p">,</span> <span class="n">MemmapTensor</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">td</span> <span class="o">=</span> <span class="n">TensorDict</span><span class="p">({</span>
 <span class="gp">... </span>    <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">MemmapTensor</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">MemmapTensor</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span>
 <span class="gp">... </span><span class="p">},</span> <span class="p">[</span><span class="mi">1_000_000</span><span class="p">])</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">file</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">td_h5</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">to_h5</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span> <span class="n">compression_opts</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">td_h5</span><span class="p">)</span>
@@ -1588,6 +1665,27 @@ expect the tensor once they are returned. Defaults to <code class="docutils lite
 <span class="sig-name descname"><span class="pre">unbind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">tensordict.tensordict.TensorDictBase</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#tensordict.SubTensorDict.unbind" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a tuple of indexed tensordicts unbound along the indicated dimension.</p>
 <p>Resulting tensordicts will share the storage of the initial tensordict.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tensordict.SubTensorDict.unflatten">
+<span class="sig-name descname"><span class="pre">unflatten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unflattened_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.SubTensorDict.unflatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unflattens a tensordict dim expanding it to a desired shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – specifies the dimension of the input tensor to be unflattened.</p></li>
+<li><p><strong>unflattened_size</strong> (<em>shape</em>) – is the new shape of the unflattened dimension of the tensordict.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">td</span> <span class="o">=</span> <span class="n">TensorDict</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)},</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_flat</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">td_unflat</span> <span class="o">=</span> <span class="n">td_flat</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">td</span> <span class="o">==</span> <span class="n">td_unflat</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1779,6 +1877,7 @@ tensor) dict should be cloned before being set. Default is
 <li><a class="reference internal" href="#tensordict.SubTensorDict.any"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.any()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.apply"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.apply()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.apply_"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.apply_()</span></code></a></li>
+<li><a class="reference internal" href="#tensordict.SubTensorDict.as_tensor"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.as_tensor()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.batch_dims"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.batch_dims</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.batch_size"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.batch_size</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.chunk"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.chunk()</span></code></a></li>
@@ -1798,6 +1897,7 @@ tensor) dict should be cloned before being set. Default is
 <li><a class="reference internal" href="#tensordict.SubTensorDict.entry_class"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.entry_class()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.expand"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.expand()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.fill_"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.fill_()</span></code></a></li>
+<li><a class="reference internal" href="#tensordict.SubTensorDict.flatten"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.flatten()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.gather"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.gather()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.gather_and_stack"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.gather_and_stack()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.get"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.get()</span></code></a></li>
@@ -1821,6 +1921,8 @@ tensor) dict should be cloned before being set. Default is
 <li><a class="reference internal" href="#tensordict.SubTensorDict.pop"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.pop()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.popitem"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.popitem()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.recv"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.recv()</span></code></a></li>
+<li><a class="reference internal" href="#tensordict.SubTensorDict.reduce"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.reduce()</span></code></a></li>
+<li><a class="reference internal" href="#tensordict.SubTensorDict.refine_names"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.refine_names()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.rename_key_"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.rename_key_()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.reshape"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.reshape()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.select"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.select()</span></code></a></li>
@@ -1840,6 +1942,7 @@ tensor) dict should be cloned before being set. Default is
 <li><a class="reference internal" href="#tensordict.SubTensorDict.to_h5"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.to_h5()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.to_tensordict"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.to_tensordict()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.unbind"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.unbind()</span></code></a></li>
+<li><a class="reference internal" href="#tensordict.SubTensorDict.unflatten"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.unflatten()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.unsqueeze"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.unsqueeze()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.update"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.update()</span></code></a></li>
 <li><a class="reference internal" href="#tensordict.SubTensorDict.update_"><code class="docutils literal notranslate"><span class="pre">SubTensorDict.update_()</span></code></a></li>

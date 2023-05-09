@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>is_tensor_collection &mdash; tensordict main documentation</title>
+  <title>tensordict.nn.set_skip_existing &mdash; tensordict main documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="make_tensordict" href="tensordict.make_tensordict.html" />
-    <link rel="prev" title="is_batchedtensor" href="tensordict.is_batchedtensor.html" />
+    <link rel="next" title="tensordict.nn.skip_existing" href="tensordict.nn.skip_existing.html" />
+    <link rel="prev" title="tensordict.nn.biased_softplus" href="tensordict.nn.biased_softplus.html" />
   <!-- Google Analytics -->
   
   <!-- End Google Analytics -->
@@ -310,15 +310,15 @@
         
           <li><a href="../index.html">API Reference</a> &gt;</li>
         
-          <li><a href="../tensordict.html">tensordict package</a> &gt;</li>
+          <li><a href="../nn.html">tensordict.nn package</a> &gt;</li>
         
-      <li>is_tensor_collection</li>
+      <li>tensordict.nn.set_skip_existing</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
         
             
-            <a href="../../_sources/reference/generated/tensordict.is_tensor_collection.rst.txt" rel="nofollow"><img src="../../_static/images/view-page-source-icon.svg"></a>
+            <a href="../../_sources/reference/generated/tensordict.nn.set_skip_existing.rst.txt" rel="nofollow"><img src="../../_static/images/view-page-source-icon.svg"></a>
           
         
       </li>
@@ -339,7 +339,7 @@
 
           
           <div class="pytorch-call-to-action-links">
-            <div id="tutorial-type">reference/generated/tensordict.is_tensor_collection</div>
+            <div id="tutorial-type">reference/generated/tensordict.nn.set_skip_existing</div>
 
             <div id="google-colab-link">
               <img class="call-to-action-img" src="../../_static/images/pytorch-colab.svg"/>
@@ -365,28 +365,124 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
-  <section id="is-tensor-collection">
-<h1>is_tensor_collection<a class="headerlink" href="#is-tensor-collection" title="Permalink to this heading">¶</a></h1>
+  <section id="tensordict-nn-set-skip-existing">
+<h1>tensordict.nn.set_skip_existing<a class="headerlink" href="#tensordict-nn-set-skip-existing" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="tensordict.is_tensor_collection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tensordict.</span></span><span class="sig-name descname"><span class="pre">is_tensor_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.is_tensor_collection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if a data object or a type is a tensor container from the tensordict lib.</p>
+<dt class="sig sig-object py" id="tensordict.nn.set_skip_existing">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tensordict.nn.</span></span><span class="sig-name descname"><span class="pre">set_skip_existing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_key_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'in_keys'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_key_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out_keys'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.nn.set_skip_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>A context manager for skipping existing nodes in a TensorDict graph.</p>
+<p>When used as a context manager, it will set the <cite>skip_existing()</cite> value
+to the <code class="docutils literal notranslate"><span class="pre">mode</span></code> indicated, leaving the user able to code up methods that
+will check the global value and execute the code accordingly.</p>
+<p>When used as a method decorator, it will check the tensordict input keys
+and if the <code class="docutils literal notranslate"><span class="pre">skip_existing()</span></code> call returns <code class="docutils literal notranslate"><span class="pre">True</span></code>, it will skip the method
+if all the output keys are already present.
+This not not expected to be used as a decorator for methods that do not
+respect the following signature: <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fun(self,</span> <span class="pre">tensordict,</span> <span class="pre">*args,</span> <span class="pre">**kwargs)</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the input is a TensorDictBase subclass, a tensorclass or an istance of these.
-<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, it indicates that existing entries in the graph
+won’t be overwritten, unless they are only partially present. <a class="reference internal" href="tensordict.nn.skip_existing.html#tensordict.nn.skip_existing" title="tensordict.nn.skip_existing"><code class="xref py py-func docutils literal notranslate"><span class="pre">skip_existing()</span></code></a>
+will return <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code>, no check will be performed.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the value of <a class="reference internal" href="tensordict.nn.skip_existing.html#tensordict.nn.skip_existing" title="tensordict.nn.skip_existing"><code class="xref py py-func docutils literal notranslate"><span class="pre">skip_existing()</span></code></a> will not be
+changed. This is intended to be used exclusively for decorating
+methods and allow their behaviour to depend on the same class
+when used as a context manager (see example below).
+Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>in_key_attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the name of the input key list attribute
+in the module’s method being decorated. Defaults to <code class="docutils literal notranslate"><span class="pre">in_keys</span></code>.</p></li>
+<li><p><strong>out_key_attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – the name of the output key list attribute
+in the module’s method being decorated. Defaults to <code class="docutils literal notranslate"><span class="pre">out_keys</span></code>.</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">TensorDictBase</span><span class="p">)</span>  <span class="c1"># True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">TensorDict</span><span class="p">({},</span> <span class="p">[]))</span>  <span class="c1"># True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@tensorclass</span>
-<span class="gp">... </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">pass</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">set_skip_existing</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">skip_existing</span><span class="p">():</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False&quot;</span><span class="p">)</span>
 <span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">MyClass</span><span class="p">)</span>  <span class="c1"># True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">MyClass</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="p">[]))</span>  <span class="c1"># True</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calling from outside:&quot;</span><span class="p">,</span> <span class="n">skip_existing</span><span class="p">())</span>
+<span class="go">calling from outside: False</span>
 </pre></div>
+</div>
+<p>This class can also be used as a decorator:
+.. rubric:: Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tensordict</span> <span class="kn">import</span> <span class="n">TensorDict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tensordict.nn</span> <span class="kn">import</span> <span class="n">set_skip_existing</span><span class="p">,</span> <span class="n">skip_existing</span><span class="p">,</span> <span class="n">TensorDictModuleBase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModule</span><span class="p">(</span><span class="n">TensorDictModuleBase</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">in_keys</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">... </span>    <span class="n">out_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="nd">@set_skip_existing</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(()))</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModule</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span><span class="p">(</span><span class="n">TensorDict</span><span class="p">({</span><span class="s2">&quot;out&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(())},</span> <span class="p">[]))</span>  <span class="c1"># does not print anything</span>
+<span class="go">TensorDict(</span>
+<span class="go">    fields={</span>
+<span class="go">        out: Tensor(shape=torch.Size([]), device=cpu, dtype=torch.float32, is_shared=False)},</span>
+<span class="go">    batch_size=torch.Size([]),</span>
+<span class="go">    device=None,</span>
+<span class="go">    is_shared=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span><span class="p">(</span><span class="n">TensorDict</span><span class="p">({},</span> <span class="p">[]))</span>  <span class="c1"># prints hello</span>
+<span class="go">hello</span>
+<span class="go">TensorDict(</span>
+<span class="go">    fields={</span>
+<span class="go">        out: Tensor(shape=torch.Size([]), device=cpu, dtype=torch.float32, is_shared=False)},</span>
+<span class="go">    batch_size=torch.Size([]),</span>
+<span class="go">    device=None,</span>
+<span class="go">    is_shared=False)</span>
+</pre></div>
+</div>
+<p>Decorating a method with the mode set to <code class="docutils literal notranslate"><span class="pre">None</span></code> is useful whenever one
+wants ot let the context manager take care of skipping things from the outside:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tensordict</span> <span class="kn">import</span> <span class="n">TensorDict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tensordict.nn</span> <span class="kn">import</span> <span class="n">set_skip_existing</span><span class="p">,</span> <span class="n">skip_existing</span><span class="p">,</span> <span class="n">TensorDictModuleBase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModule</span><span class="p">(</span><span class="n">TensorDictModuleBase</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">in_keys</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">... </span>    <span class="n">out_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="nd">@set_skip_existing</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(()))</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModule</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">TensorDict</span><span class="p">({</span><span class="s2">&quot;out&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(())},</span> <span class="p">[]))</span>  <span class="c1"># prints &quot;hello&quot;</span>
+<span class="go">hello</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">set_skip_existing</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">TensorDict</span><span class="p">({</span><span class="s2">&quot;out&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(())},</span> <span class="p">[]))</span>  <span class="c1"># no print</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To allow for modules to have the same input and output keys and not
+mistakenly ignoring subgraphs, <code class="docutils literal notranslate"><span class="pre">&#64;set_skip_existing(True)</span></code> will be
+deactivated whenever the output keys are also the input keys:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModule</span><span class="p">(</span><span class="n">TensorDictModuleBase</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">in_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">out_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="nd">@set_skip_existing</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calling the method!&quot;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModule</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span><span class="p">(</span><span class="n">TensorDict</span><span class="p">({</span><span class="s2">&quot;out&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(())},</span> <span class="p">[]))</span>  <span class="c1"># does not print anything</span>
+<span class="go">calling the method!</span>
+<span class="go">TensorDict(</span>
+<span class="go">    fields={</span>
+<span class="go">        out: Tensor(shape=torch.Size([]), device=cpu, dtype=torch.float32, is_shared=False)},</span>
+<span class="go">    batch_size=torch.Size([]),</span>
+<span class="go">    device=None,</span>
+<span class="go">    is_shared=False)</span>
+</pre></div>
+</div>
 </div>
 </dd></dl>
 
@@ -400,10 +496,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tensordict.make_tensordict.html" class="btn btn-neutral float-right" title="make_tensordict" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="tensordict.nn.skip_existing.html" class="btn btn-neutral float-right" title="tensordict.nn.skip_existing" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="tensordict.is_batchedtensor.html" class="btn btn-neutral" title="is_batchedtensor" accesskey="p" rel="prev"><img src="../../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="tensordict.nn.biased_softplus.html" class="btn btn-neutral" title="tensordict.nn.biased_softplus" accesskey="p" rel="prev"><img src="../../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -435,8 +531,8 @@
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">is_tensor_collection</a><ul>
-<li><a class="reference internal" href="#tensordict.is_tensor_collection"><code class="docutils literal notranslate"><span class="pre">is_tensor_collection</span></code></a></li>
+<li><a class="reference internal" href="#">tensordict.nn.set_skip_existing</a><ul>
+<li><a class="reference internal" href="#tensordict.nn.set_skip_existing"><code class="docutils literal notranslate"><span class="pre">set_skip_existing</span></code></a></li>
 </ul>
 </li>
 </ul>

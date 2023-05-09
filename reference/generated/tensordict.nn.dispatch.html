@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>is_tensor_collection &mdash; tensordict main documentation</title>
+  <title>tensordict.nn.dispatch &mdash; tensordict main documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="make_tensordict" href="tensordict.make_tensordict.html" />
-    <link rel="prev" title="is_batchedtensor" href="tensordict.is_batchedtensor.html" />
+    <link rel="next" title="tensordict.nn.set_interaction_type" href="tensordict.nn.set_interaction_type.html" />
+    <link rel="prev" title="tensordict.nn.make_tensordict" href="tensordict.nn.make_tensordict.html" />
   <!-- Google Analytics -->
   
   <!-- End Google Analytics -->
@@ -310,15 +310,15 @@
         
           <li><a href="../index.html">API Reference</a> &gt;</li>
         
-          <li><a href="../tensordict.html">tensordict package</a> &gt;</li>
+          <li><a href="../nn.html">tensordict.nn package</a> &gt;</li>
         
-      <li>is_tensor_collection</li>
+      <li>tensordict.nn.dispatch</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
         
             
-            <a href="../../_sources/reference/generated/tensordict.is_tensor_collection.rst.txt" rel="nofollow"><img src="../../_static/images/view-page-source-icon.svg"></a>
+            <a href="../../_sources/reference/generated/tensordict.nn.dispatch.rst.txt" rel="nofollow"><img src="../../_static/images/view-page-source-icon.svg"></a>
           
         
       </li>
@@ -339,7 +339,7 @@
 
           
           <div class="pytorch-call-to-action-links">
-            <div id="tutorial-type">reference/generated/tensordict.is_tensor_collection</div>
+            <div id="tutorial-type">reference/generated/tensordict.nn.dispatch</div>
 
             <div id="google-colab-link">
               <img class="call-to-action-img" src="../../_static/images/pytorch-colab.svg"/>
@@ -365,27 +365,152 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
-  <section id="is-tensor-collection">
-<h1>is_tensor_collection<a class="headerlink" href="#is-tensor-collection" title="Permalink to this heading">¶</a></h1>
+  <section id="tensordict-nn-dispatch">
+<h1>tensordict.nn.dispatch<a class="headerlink" href="#tensordict-nn-dispatch" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="tensordict.is_tensor_collection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tensordict.</span></span><span class="sig-name descname"><span class="pre">is_tensor_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.is_tensor_collection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if a data object or a type is a tensor container from the tensordict lib.</p>
+<dt class="sig sig-object py" id="tensordict.nn.dispatch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tensordict.nn.</span></span><span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'in_keys'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out_keys'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tensordict.nn.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows for a function expecting a TensorDict to be called using kwargs.</p>
+<p><a class="reference internal" href="#tensordict.nn.dispatch" title="tensordict.nn.dispatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">dispatch()</span></code></a> must be used within modules that have an <code class="docutils literal notranslate"><span class="pre">in_keys</span></code> (or
+another source of keys indicated by the <code class="docutils literal notranslate"><span class="pre">source</span></code> keyword argument) and
+<code class="docutils literal notranslate"><span class="pre">out_keys</span></code> (or another <code class="docutils literal notranslate"><span class="pre">dest</span></code> key list) attributes indicating what keys
+to be read and written from the tensordict. The wrapped function should
+also have a <code class="docutils literal notranslate"><span class="pre">tensordict</span></code> leading argument.</p>
+<p>The resulting function will return a single tensor (if there is a single
+element in out_keys), otherwise it will return a tuple sorted as the <code class="docutils literal notranslate"><span class="pre">out_keys</span></code>
+of the module.</p>
+<p><a class="reference internal" href="#tensordict.nn.dispatch" title="tensordict.nn.dispatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">dispatch()</span></code></a> can be used either as a method or as a class when extra arguments
+need to be passed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the input is a TensorDictBase subclass, a tensorclass or an istance of these.
-<code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>separator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – separator that combines sub-keys together
+for <code class="docutils literal notranslate"><span class="pre">in_keys</span></code> that are tuples of strings.
+Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;_&quot;</span></code>.</p></li>
+<li><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>keys</em><em>, </em><em>optional</em>) – if a string is provided,
+it points to the module attribute that contains the
+list of input keys to be used. If a list is provided instead, it
+will contain the keys used as input to the module.
+Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;in_keys&quot;</span></code> which is the attribute name of
+<a class="reference internal" href="tensordict.nn.TensorDictModule.html#tensordict.nn.TensorDictModule" title="tensordict.nn.TensorDictModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensorDictModule</span></code></a> list of input keys.</p></li>
+<li><p><strong>dest</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>keys</em><em>, </em><em>optional</em>) – if a string is provided,
+it points to the module attribute that contains the
+list of output keys to be used. If a list is provided instead, it
+will contain the keys used as output to the module.
+Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;out_keys&quot;</span></code> which is the attribute name of
+<a class="reference internal" href="tensordict.nn.TensorDictModule.html#tensordict.nn.TensorDictModule" title="tensordict.nn.TensorDictModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensorDictModule</span></code></a> list of output keys.</p></li>
+<li><p><strong>auto_batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, the batch-size of the
+input tensordict is determined automatically as the maximum number
+of common dimensions across all the input tensors.
+Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">TensorDictBase</span><span class="p">)</span>  <span class="c1"># True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">TensorDict</span><span class="p">({},</span> <span class="p">[]))</span>  <span class="c1"># True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@tensorclass</span>
-<span class="gp">... </span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">pass</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModule</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">in_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">out_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
 <span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">MyClass</span><span class="p">)</span>  <span class="c1"># True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_tensor_collection</span><span class="p">(</span><span class="n">MyClass</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="p">[]))</span>  <span class="c1"># True</span>
+<span class="gp">... </span>    <span class="nd">@dispatch</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModule</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># equivalently</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModule</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">keys_in</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">keys_out</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="nd">@dispatch</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;keys_in&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;keys_out&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModule</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># or this</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModule</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nd">@dispatch</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">dest</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModule</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">dispatch_kwargs()</span></code> will also work with nested keys with the default
+<code class="docutils literal notranslate"><span class="pre">&quot;_&quot;</span></code> separator.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModuleNest</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">in_keys</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)]</span>
+<span class="gp">... </span>    <span class="n">out_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="nd">@dispatch</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModuleNest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">,</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">a_c</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If another separator is wanted, it can be indicated with the <code class="docutils literal notranslate"><span class="pre">separator</span></code>
+argument in the constructor:</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModuleNest</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">in_keys</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)]</span>
+<span class="gp">... </span>    <span class="n">out_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="nd">@dispatch</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s2">&quot;sep&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModuleNest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">,</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">asepc</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Since the input keys is a sorted sequence of strings,
+<a class="reference internal" href="#tensordict.nn.dispatch" title="tensordict.nn.dispatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">dispatch()</span></code></a> can also be used with unnamed arguments where the order
+must match the order of the input keys.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the first argument is a <code class="xref py py-class docutils literal notranslate"><span class="pre">TensorDictBase</span></code> instance, it is
+assumed that dispatch is __not__ being used and that this tensordict
+contains all the necessary information to be run through the module.
+In other words, one cannot decompose a tensordict with the first key
+of the module inputs pointing to a tensordict instance.
+In general, it is preferred to use <a class="reference internal" href="#tensordict.nn.dispatch" title="tensordict.nn.dispatch"><code class="xref py py-func docutils literal notranslate"><span class="pre">dispatch()</span></code></a> with tensordict
+leaves only.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModuleNest</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">in_keys</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">),</span> <span class="s2">&quot;d&quot;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">out_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="nd">@dispatch</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensordict</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensordict</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">tensordict</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">tensordict</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">MyModuleNest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">,</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># works</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">,</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># works</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">b</span><span class="p">,</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">a_c</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># fails</span>
+<span class="gp">... </span><span class="k">except</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;oopsy!&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -400,10 +525,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tensordict.make_tensordict.html" class="btn btn-neutral float-right" title="make_tensordict" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="tensordict.nn.set_interaction_type.html" class="btn btn-neutral float-right" title="tensordict.nn.set_interaction_type" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="tensordict.is_batchedtensor.html" class="btn btn-neutral" title="is_batchedtensor" accesskey="p" rel="prev"><img src="../../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="tensordict.nn.make_tensordict.html" class="btn btn-neutral" title="tensordict.nn.make_tensordict" accesskey="p" rel="prev"><img src="../../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -435,8 +560,8 @@
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">is_tensor_collection</a><ul>
-<li><a class="reference internal" href="#tensordict.is_tensor_collection"><code class="docutils literal notranslate"><span class="pre">is_tensor_collection</span></code></a></li>
+<li><a class="reference internal" href="#">tensordict.nn.dispatch</a><ul>
+<li><a class="reference internal" href="#tensordict.nn.dispatch"><code class="docutils literal notranslate"><span class="pre">dispatch</span></code></a></li>
 </ul>
 </li>
 </ul>
