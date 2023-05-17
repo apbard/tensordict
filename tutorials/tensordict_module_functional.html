@@ -218,7 +218,7 @@
               
               
                 <div class="version">
-                  main (0.1.1+961bf9d )
+                  main (0.1.2+8913d81 )
                 </div>
               
             
@@ -439,9 +439,7 @@ of data:</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">functorch</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">params_expand</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">buffers_expand</span></a><span class="p">,</span> <span class="n">tensordict</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[None]
-[3, 5] 0 3 [0] [None, None]
-TensorDict(
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>TensorDict(
     fields={
         a: Tensor(shape=torch.Size([3, 5, 3]), device=cpu, dtype=torch.float32, is_shared=False),
         output_1: Tensor(shape=torch.Size([3, 5, 4]), device=cpu, dtype=torch.float32, is_shared=False),
@@ -467,12 +465,10 @@ parameters as regular inputs:</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the output tensordict shape is: &quot;</span><span class="p">,</span> <span class="n">result_td</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[None]
-[2, 5] 0 2 [0] [None, None]
-the output tensordict shape is:  torch.Size([2, 5])
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>the output tensordict shape is:  torch.Size([2, 5])
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.026 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.019 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-tutorials-tensordict-module-functional-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/89870b68a09187f28d52129365f70c08/tensordict_module_functional.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">tensordict_module_functional.py</span></code></a></p>
